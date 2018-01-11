@@ -1,0 +1,56 @@
+#!/bin/sh
+#|-*- mode:lisp -*-|#
+#|
+exec ros -Q -- $0 "$@"
+|#
+(asdf:initialize-source-registry
+ '(:source-registry
+   (:tree (:here ".."))
+   (:directory (:here ".."))	 
+   :inherit-configuration))
+
+(progn ;;init forms
+  (ros:ensure-asdf)
+   #+quicklisp (ql:quickload '( :hello-world ) :silent t)
+  )
+
+(defpackage :ros.script.hello-world.3724135811
+  (:use :cl)
+	(:use :hello-world)
+	)
+(in-package :ros.script.hello-world.3724135811)
+
+;; instance variable
+(defvar h1)
+(defvar h2)
+
+(defun main (&rest argv)
+  (declare (ignorable argv))
+	
+	(format t "~%script start.~%")	
+
+	(format t "~%call (hello-world:get-world ())~%-> ")
+	(hello-world:get-world ())
+
+	(format t "~%call (hello-world:get-world \"Hello, World!!\")	~%-> ")
+	(hello-world:get-world "Hello, World!!")
+
+	(format t "~%call get-world2 method ~%-> ")
+	
+	(setq h1 (make-instance 'hello-world))
+	(get-world2 h1)
+
+	(format t "~%call get-world2 nethod with parameter ~%-> ")
+	
+	(setq h2 (make-instance 'hello-world :body "Hello, World!!!!"))
+	(get-world2 h2)
+
+	(format t "~%call get-world2 nethod with set-world2 ~%-> ")
+	
+	(set-world2 h2 "Hello, World!!!!!!!!!!")
+	(get-world2 h2)
+
+	(format t "~%script done.~%")
+	
+	)
+;;; vim: set ft=lisp lisp:
