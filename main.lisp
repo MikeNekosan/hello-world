@@ -19,7 +19,7 @@
 	 )
 	)
 
-(defmethod get-world (h)
+(defun get-world (h)
 	(if h
 			(format t "~a~%" h)
 			(format t "Hello, World!~%")
