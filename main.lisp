@@ -11,6 +11,7 @@
 (in-package :hello-world)
 
 (defvar *iv* :description "Instance Variable")
+(defvar *param* :description "set-world2 parameter")
 
 (defclass hello-world ()
 	((body :accessor body
@@ -25,8 +26,8 @@
 			(format t "Hello, World!~%")
 			))
 
-(defmethod set-world2 ((*iv* hello-world) param)
-	(setf (slot-value *iv* 'body) param)
+(defmethod set-world2 ((*iv* hello-world) *param*)
+	(setf (slot-value *iv* 'body) *param*)
 	)
 
 (defmethod get-world2 ((*iv* hello-world))
