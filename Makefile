@@ -6,7 +6,8 @@ all: ${TARGET}
 
 %.pdf : %.me
 	@echo "creating " $@
-	@groff -me $< | pstopdf -i -o $@
+#       @groff -me $< | pstopdf -i -o $@
+        @groff -me -Tpdf $< > $@
 	
 .PHONY: clean
 clean:
